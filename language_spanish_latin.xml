@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+<id>Dougiefresh:ArchivePMs</id>
+<name>Archive Old PMs</name>
+<version>1.2</version>
+
+<file name="$languagedir/Profile.spanish_latin-utf8.php" error="skip">
+	<operation>
+		<search position="end" />
+		<add><![CDATA[
+$txt['pm_archived'] = 'Archivado';
+$txt['pm_archive_enabled'] = '¿Habilitar los mensajes de archivo personales?';
+$txt['pm_archive_after'] = 'Archivar mensajes personales anteriores a:<div class="smalltext"><strong>NOTA:</strong> Poner <strong>0</strong> para deshabilitar</div>';
+]]></add>
+	</operation>
+</file>
+
+<file name="$languagedir/Profile.spanish_latin.php" error="skip">
+	<operation>
+		<search position="end" />
+		<add><![CDATA[
+$txt['pm_archived'] = 'Archivado';
+$txt['pm_archive_enabled'] = '&iquest;Habilitar los mensajes de archivo personales?';
+$txt['pm_archive_after'] = 'Archivar mensajes personales anteriores a:<div class="smalltext"><strong>NOTA:</strong> Poner <strong>0</strong> para deshabilitar</div>';
+]]></add>
+	</operation>
+</file>
+</modification>

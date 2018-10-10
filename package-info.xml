@@ -5,18 +5,20 @@
 	<id>Dougiefresh:ArchivePMs</id>
 	<name>Archive Old PMs</name>
 	<type>modification</type>
-	<version>1.1</version>
+	<version>1.2</version>
 
 	<install for="2.0 - 2.0.99">
 		<readme parsebbc="true">readme.txt</readme>
 		<database>db_install.php</database>
 		<modification>install_20x.xml</modification>
 		<modification>language_english.xml</modification>
+		<modification>language_spanish_latin.xml</modification>
 		<require-file name="archived.gif" destination="$imagesdir/english" />
 	</install>
 	<uninstall for="2.0 - 2.0.99">
 		<modification reverse="true">install_20x.xml</modification>
 		<modification reverse="true">language_english.xml</modification>
+		<modification reverse="true">language_spanish_latin.xml</modification>
 		<remove-file name="$imagesdir/english/archived.gif" />
 	</uninstall>
 
@@ -25,9 +27,11 @@
 		<database>db_install.php</database>
 		<modification>install_21x.xml</modification>
 		<modification>language_english.xml</modification>
+		<modification>language_spanish_latin.xml</modification>
 	</install>
 	<uninstall for="2.1 Beta 3">
 		<modification reverse="true">install_21x.xml</modification>
 		<modification reverse="true">language_english.xml</modification>
+		<modification reverse="true">language_spanish_latin.xml</modification>
 	</uninstall>
 </package-info>

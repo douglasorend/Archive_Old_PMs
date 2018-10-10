@@ -1,3 +1,8 @@
+v1.2 - February 14th, 2018
+o Added Spanish Latin translation, courtsey of [url=https://www.simplemachines.org/community/index.php?action=profile;u=322597]Rock Lee[/url].
+o Added [b]LICENSE.txt[/b] to satisfy licensing concerns.
+o Moved code that marks PMs as archived so I can use display mode context variable.
+
 v1.1 - January 9th, 2018
 o Added support for 2.1 Beta 3.
 o Fixed name of mod in [b]readme.txt[/b] documentation file.

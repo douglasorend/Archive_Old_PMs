@@ -1,11 +1,11 @@
 [hr]
-[center][color=red][size=16pt][b]ARCHIVE OLD PMS v1.1[/b][/size][/color]
+[center][color=red][size=16pt][b]ARCHIVE OLD PMS v1.2[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=4165]Link to Mod[/url]
 [/center]
 [hr]
 
 [color=blue][b][size=12pt][u]Introduction[/u][/size][/b][/color]
-This mod moves PMs that are over a user-specified number of days to the bottom of the PM list.  It also attaches an "archived" image to the PM subject, making it easy to identify which PMs have been archived.
+This mod moves conversation PMs that are over a user-specified number of days to the bottom of the PM list.  It also attaches an "archived" image to the PM subject, making it easy to identify which PMs have been archived.
 
 The number of days is set on a per-member basis and is initially set to [b]0[/b].  Changing this value lower than it's current value does not unarchive messages already marked as archived.
 
@@ -19,6 +19,9 @@ This mod was tested on SMF 2.0.15 and SMF 2.1 Beta 3 using a MySQL database, but
 
 [color=blue][b][size=12pt][u]Related Discussion[/u][/size][/b][/color]
 o [url=https://www.simplemachines.org/community/index.php?topic=555681.0]PM Archiving?[/url]
+
+[color=blue][b][size=12pt][u]Translators[/u][/size][/b][/color]
+o Spanish Latin translation: [url=https://www.simplemachines.org/community/index.php?action=profile;u=322597]Rock Lee[/url].
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
 The changelog has been removed and can be seen at [url=http://www.xptsp.com/board/index.php?topic=1626.msg2333#msg2333]XPtsp.com[/url].

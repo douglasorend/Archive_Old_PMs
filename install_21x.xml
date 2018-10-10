@@ -3,7 +3,7 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>Dougiefresh:MoveToEnd</id>
 <name>Move Old PMs To End</name>
-<version>1.1</version>
+<version>1.2</version>
 
 <!------------------------------------------------------------------------------
 <!-- Source file modifications
@@ -19,10 +19,10 @@
 <file name="$sourcedir/PersonalMessage.php">
 	<!-- MessageMain function -->
 	<operation> <!-- line 258 -->
-		<search position="after"><![CDATA[// Preferences...]]></search>
+		<search position="after"><![CDATA[$subActions = array(]]></search>
 		<add><![CDATA[// Mark any PMs received as archived if user-specified period has passed:
 	$context['pm_archive_after'] = 0;
-	if (!empty($user_info['pm_archive_after']) && $user_info['pm_archive_after'] > 0)
+	if ($context['display_mode'] == 2 && !empty($user_info['pm_archive_after']) && $user_info['pm_archive_after'] > 0)
 	{
 		$context['pm_archive_after'] = $user_info['pm_archive_after'];
 		$smcFunc['db_query']('', '
