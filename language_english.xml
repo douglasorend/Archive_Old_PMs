@@ -3,8 +3,15 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>Dougiefresh:ArchivePMs</id>
 <name>Archive Old PMs</name>
-<version>1.0</version>
+<version>1.1</version>
 
+<file name="$languagedir/Profile.english.php">
+	<operation>
+		<search position="end" />
+		<add><![CDATA[
+$txt['pm_archived'] = 'Archived';
+	</operation>
+</file>
 <file name="$languagedir/Profile.english.php">
 	<operation>
 		<search position="end" />

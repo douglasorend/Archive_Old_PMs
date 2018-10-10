@@ -1,5 +1,5 @@
 [hr]
-[center][color=red][size=16pt][b]MOVE OLD PMS TO END v1.0[/b][/size][/color]
+[center][color=red][size=16pt][b]ARCHIVE OLD PMS v1.1[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=4165]Link to Mod[/url]
 [/center]
 [hr]
@@ -15,7 +15,7 @@ o [b]Enable archiving personal messages?[/b]
 o [b]Archive personal messages older than [nobbc][x][/nobbc] days[/b]
 
 [color=blue][b][size=12pt][u]Compatibility Notes[/u][/size][/b][/color]
-This mod was tested on SMF 2.0.15 using a MySQL database, but should work on SMF 2.0 and up.  SMF 1.x is not and will not be supported.  Postgres databases have not been tested.
+This mod was tested on SMF 2.0.15 and SMF 2.1 Beta 3 using a MySQL database, but should work on SMF 2.0 and up.  SMF 1.x is not and will not be supported.  Postgres databases have not been tested.
 
 [color=blue][b][size=12pt][u]Related Discussion[/u][/size][/b][/color]
 o [url=https://www.simplemachines.org/community/index.php?topic=555681.0]PM Archiving?[/url]
@@ -24,7 +24,7 @@ o [url=https://www.simplemachines.org/community/index.php?topic=555681.0]PM Arch
 The changelog has been removed and can be seen at [url=http://www.xptsp.com/board/index.php?topic=1626.msg2333#msg2333]XPtsp.com[/url].
 
 [color=blue][b][size=12pt][u]License[/u][/size][/b][/color]
-[quote]Copyright (c) 2017, Douglas Orend
+[quote]Copyright (c) 2017 - 2018, Douglas Orend
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:

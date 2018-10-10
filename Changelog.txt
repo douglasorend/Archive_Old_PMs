@@ -1,2 +1,6 @@
+v1.1 - January 9th, 2018
+o Added support for 2.1 Beta 3.
+o Fixed name of mod in [b]readme.txt[/b] documentation file.
+
 v1.0 - November 7th, 2017
 o Initial release to the public

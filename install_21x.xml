@@ -43,22 +43,6 @@
 	</operation>
 
 	<!-- MessageFolder function -->
-	<operation>	<!-- line 629 -->
-		<search position="before"><![CDATA[SELECT MAX({raw:sort}) AS sort_param, pm.id_pm_head]]></search>
-		<add><![CDATA[' . ($context['pm_archive_after'] ? ', IF(pmr.archived = 2, 2, 0) AS is_archived, ' : '') . ']]></add>
-	</operation>
-	<operation>	<!-- line 641 -->
-		<search position="replace"><![CDATA[ORDER BY sort_param' . ($descending ? ' DESC' : ' ASC') . (empty($pmsg) ? ']]></search>
-		<add><![CDATA[ORDER BY ' . ($context['pm_archive_after'] ? 'is_archived ASC, ' : '') . 'sort_param' . ($descening ? ' DESC' : ' ASC') . (empty($pmsg) ? ']]></add>
-	</operation>
-	<operation>	<!-- line 658 -->
-		<search position="before"><![CDATA[SELECT pm.id_pm AS id_pm, pm.id_pm_head]]></search>
-		<add><![CDATA[' . ($context['pm_archive_after'] ? ', IF(pmr.archived = 2, 2, 0) AS is_archived, ' : '') . ']]></add>
-	</operation>
-	<operation>	<!-- line 667 -->
-		<search position="replace"><![CDATA[ORDER BY ' . ($_GET['sort'] == 'pm.id_pm' && $context['folder'] != 'sent' ? 'id_pm' : '{raw:sort}') . ($descending ? ' DESC' : ' ASC') . (empty($pmsg) ? ']]></search>
-		<add><![CDATA[ORDER BY ' . ($context['pm_archive_after'] ? 'is_archived ASC, ' : '') . ($_GET['sort'] == 'pm.id_pm' && $context['folder'] != 'sent' ? 'id_pm' : '{raw:sort}') . ($descending ? ' DESC' : ' ASC') . (empty($pmsg) ? ']]></add>
-	</operation>
 	<operation>	<!-- line 681 -->
 		<search position="before"><![CDATA[SELECT MAX(pm.id_pm) AS id_pm, pm.id_pm_head]]></search>
 		<add><![CDATA[' . ($context['pm_archive_after'] ? ', IF(pmr.archived = 2, 2, 0) AS is_archived, ' : '') . ']]></add>
@@ -85,15 +69,15 @@
 		<add><![CDATA[ORDER BY ' . ($context['pm_archive_after'] ? 'is_archived ASC, ' : '') . 'pm.id_pm',]]></add>
 	</operation>
 	<operation>	<!-- line 873 -->
-		<search position="replace"><![CDATA[IFNULL(mem.id_member, 0) AS not_guest
+		<search position="replace"><![CDATA[mem.id_member
 				FROM {db_prefix}personal_messages AS pm]]></search>
-		<add><![CDATA[IFNULL(mem.id_member, 0) AS not_guest' . ($context['folder'] != 'sent' ? ', pmr.archived' : '') . '
+		<add><![CDATA[mem.id_member' . ($context['folder'] != 'sent' ? ', pmr.archived' : '') . '
 				FROM {db_prefix}personal_messages AS pm' . ($context['folder'] != 'sent' ? '
 					LEFT JOIN {db_prefix}pm_recipients AS pmr ON (pmr.id_pm = pm.id_pm AND pmr.id_member = {int:id_member})' : '') . ']]></add>
 	</operation>
 	<operation>	<!-- line 877 -->
 		<search position="before"><![CDATA[ORDER BY ' . implode(', ', $orderBy) . '
-				LIMIT ' . count($pms),
+				LIMIT {int:limit}',
 				array(]]></search>
 		<add><![CDATA[
 					'id_member' => $user_info['id'],]]></add>
@@ -139,12 +123,6 @@
 		),
 		]]></add>
 	</operation>
-
-	<!-- pmprefs function -->
-	<operation>	<!-- line 1647 -->
-		<search position="before"><![CDATA['pm_prefs',]]></search>
-		<add><![CDATA[ 'hr', 'pm_archive_after',]]></add>
-	</operation>
 </file>
 
 <!------------------------------------------------------------------------------
@@ -153,8 +131,8 @@
 <file name="$themedir/PersonalMessage.template.php">
 	<-- template_subject_list function -->
 	<operation>	<!-- line 592 -->
-		<search position="before"><![CDATA[', $message['is_unread'] ? '&nbsp;<img src="' . $settings['lang_images_url'] . '/new.gif" alt="' . $txt['new'] . '" />' : '', ]]></search>
-		<add><![CDATA[ !empty($message['archived']) ? '&nbsp;<img src="' . $settings['lang_images_url'] . '/archived.gif" alt="' . $txt['archived'] . '" />' : '', ]]></add>
+		<search position="before"><![CDATA[$message['is_unread'] ? '&nbsp;<span class="new_posts">' . $txt['new'] . '</span>' : '', ]]></search>
+		<add><![CDATA[ !empty($message['archived']) ? '&nbsp;'&nbsp;<span class="new_posts">' . $txt['archived'] . '</span>' : '', ' : '', ]]></add>
 	</operation>
 </file>
 <file name="$themedir/Profile.template.php">
