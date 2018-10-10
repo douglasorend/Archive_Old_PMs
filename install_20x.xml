@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+<id>Dougiefresh:MoveToEnd</id>
+<name>Move Old PMs To End</name>
+<version>1.0</version>
+
+<!------------------------------------------------------------------------------
+<!-- Source file modifications
+<!----------------------------------------------------------------------------->
+<file name="$sourcedir/Load.php">
+	<!-- loadUserSettings function -->
+	<operation>	<!-- line 548 -->
+		<search position="before"><![CDATA['permissions' => array(),]]></search>
+		<add><![CDATA[
+		'pm_archive_after' => isset($user_settings['pm_archive_after']) ? $user_settings['pm_archive_after'] : 0,]]></add>
+	</operation>
+</file>
+<file name="$sourcedir/PersonalMessage.php">
+	<!-- MessageMain function -->
+	<operation> <!-- line 258 -->
+		<search position="after"><![CDATA[// Preferences...]]></search>
+		<add><![CDATA[// Mark any PMs received as archived if user-specified period has passed:
+	$context['pm_archive_after'] = 0;
+	if (!empty($user_info['pm_archive_after']) && $user_info['pm_archive_after'] > 0)
+	{
+		$context['pm_archive_after'] = $user_info['pm_archive_after'];
+		$smcFunc['db_query']('', '
+			UPDATE {db_prefix}pm_recipients pmr
+			LEFT JOIN {db_prefix}personal_messages pm ON (pmr.id_pm = pm.id_pm)
+			SET pmr.archived = {int:archived}
+			WHERE pm.msgtime < {int:time}
+				AND pmr.archived = {int:not_archived}',
+			array(
+				'archived' => 2,
+				'not_archived' => 0,
+				'time' => time() - ($user_info['pm_archive_after'] * 86400),
+			)
+		);
+	}
+
+	]]></add>
+	</operation>
+
+	<!-- MessageFolder function -->
+	<operation>	<!-- line 629 -->
+		<search position="before"><![CDATA[SELECT MAX({raw:sort}) AS sort_param, pm.id_pm_head]]></search>
+		<add><![CDATA[' . ($context['pm_archive_after'] ? ', IF(pmr.archived = 2, 2, 0) AS is_archived, ' : '') . ']]></add>
+	</operation>
+	<operation>	<!-- line 641 -->
+		<search position="replace"><![CDATA[ORDER BY sort_param' . ($descending ? ' DESC' : ' ASC') . (empty($pmsg) ? ']]></search>
+		<add><![CDATA[ORDER BY ' . ($context['pm_archive_after'] ? 'is_archived ASC, ' : '') . 'sort_param' . ($descening ? ' DESC' : ' ASC') . (empty($pmsg) ? ']]></add>
+	</operation>
+	<operation>	<!-- line 658 -->
+		<search position="before"><![CDATA[SELECT pm.id_pm AS id_pm, pm.id_pm_head]]></search>
+		<add><![CDATA[' . ($context['pm_archive_after'] ? ', IF(pmr.archived = 2, 2, 0) AS is_archived, ' : '') . ']]></add>
+	</operation>
+	<operation>	<!-- line 667 -->
+		<search position="replace"><![CDATA[ORDER BY ' . ($_GET['sort'] == 'pm.id_pm' && $context['folder'] != 'sent' ? 'id_pm' : '{raw:sort}') . ($descending ? ' DESC' : ' ASC') . (empty($pmsg) ? ']]></search>
+		<add><![CDATA[ORDER BY ' . ($context['pm_archive_after'] ? 'is_archived ASC, ' : '') . ($_GET['sort'] == 'pm.id_pm' && $context['folder'] != 'sent' ? 'id_pm' : '{raw:sort}') . ($descending ? ' DESC' : ' ASC') . (empty($pmsg) ? ']]></add>
+	</operation>
+	<operation>	<!-- line 681 -->
+		<search position="before"><![CDATA[SELECT MAX(pm.id_pm) AS id_pm, pm.id_pm_head]]></search>
+		<add><![CDATA[' . ($context['pm_archive_after'] ? ', IF(pmr.archived = 2, 2, 0) AS is_archived, ' : '') . ']]></add>
+	</operation>
+	<operation>	<!-- line 693 -->
+		<search position="replace"><![CDATA[ORDER BY ' . ($_GET['sort'] == 'pm.id_pm' && $context['folder'] != 'sent' ? 'id_pm' : '{raw:sort}') . ($descending ? ' DESC' : ' ASC') . (empty($_GET['pmsg']) ? ']]></search>
+		<add><![CDATA[ORDER BY ' . ($context['pm_archive_after'] ? 'is_archived ASC, ' : '') . ($_GET['sort'] == 'pm.id_pm' && $context['folder'] != 'sent' ? 'id_pm' : '{raw:sort}') . ($descending ? ' DESC' : ' ASC') . (empty($_GET['pmsg']) ? ']]></add>
+	</operation>
+	<operation>	<!-- line 710 -->
+		<search position="before"><![CDATA[SELECT pm.id_pm, pm.id_pm_head, pm.id_member_from]]></search>
+		<add><![CDATA[' . ($context['pm_archive_after'] ? ', IF(pmr.archived = 2, 2, 0) AS is_archived, ' : '') . ']]></add>
+	</operation>
+	<operation>	<!-- line 721 -->
+		<search position="replace"><![CDATA[ORDER BY ' . ($_GET['sort'] == 'pm.id_pm' && $context['folder'] != 'sent' ? 'pmr.id_pm' : '{raw:sort}') . ($descending ? ' DESC' : ' ASC') . (empty($pmsg) ? ']]></search>
+		<add><![CDATA[ORDER BY ' . ($context['pm_archive_after'] ? 'is_archived ASC, ' : '') . ($_GET['sort'] == 'pm.id_pm' && $context['folder'] != 'sent' ? 'pmr.id_pm' : '{raw:sort}') . ($descending ? ' DESC' : ' ASC') . (empty($pmsg) ? ']]></add>
+	</operation>
+	<operation>	<!-- line 780 -->
+		<search position="before"><![CDATA[SELECT pm.id_pm, pm.id_member_from, pm.deleted_by_sender, pmr.id_member, pmr.deleted]]></search>
+		<add><![CDATA[' . ($context['pm_archive_after'] ? ',
+					IF(pmr.archived = 2, 2, 0) AS is_archived, ' : '') . ']]></add>
+	</operation>
+	<operation>	<!-- line 786 -->
+		<search position="replace"><![CDATA[ORDER BY pm.id_pm',]]></search>
+		<add><![CDATA[ORDER BY ' . ($context['pm_archive_after'] ? 'is_archived ASC, ' : '') . 'pm.id_pm',]]></add>
+	</operation>
+	<operation>	<!-- line 873 -->
+		<search position="replace"><![CDATA[IFNULL(mem.id_member, 0) AS not_guest
+				FROM {db_prefix}personal_messages AS pm]]></search>
+		<add><![CDATA[IFNULL(mem.id_member, 0) AS not_guest' . ($context['folder'] != 'sent' ? ', pmr.archived' : '') . '
+				FROM {db_prefix}personal_messages AS pm' . ($context['folder'] != 'sent' ? '
+					LEFT JOIN {db_prefix}pm_recipients AS pmr ON (pmr.id_pm = pm.id_pm AND pmr.id_member = {int:id_member})' : '') . ']]></add>
+	</operation>
+	<operation>	<!-- line 877 -->
+		<search position="before"><![CDATA[ORDER BY ' . implode(', ', $orderBy) . '
+				LIMIT ' . count($pms),
+				array(]]></search>
+		<add><![CDATA[
+					'id_member' => $user_info['id'],]]></add>
+	</operation>
+	<operation> <!-- line 888 -->
+		<search position="replace"><![CDATA[($context['folder'] == 'sent' ? '
+				LEFT JOIN {db_prefix}pm_recipients AS pmr ON (pmr.id_pm = pm.id_pm)' : '')]]></search>
+		<add><![CDATA[($context['folder'] == 'sent' ? '
+				LEFT JOIN {db_prefix}pm_recipients AS pmr ON (pmr.id_pm = pm.id_pm)' : '
+				LEFT JOIN {db_prefix}pm_recipients AS pmr ON (pmr.id_pm = pm.id_pm)')]]></add>
+	</operation>
+
+	<!-- prepareMessageContext function -->
+	<operation>
+		<search position="before"><![CDATA['id' => $subject['id_pm'],]]></search>
+		<add><![CDATA[
+			'archived' => !empty($context['pm_archive_after']) && !empty($subject['is_archived']),]]></add>
+	</operation>
+</file>
+<file name="$sourcedir/Profile-Modify.php">
+	<!-- loadProfileFields function -->
+	<operation>	<!-- line 537 -->
+		<search position="after"><![CDATA[// This does ALL the pm settings]]></search>
+		<add><![CDATA['pm_archive_after' => array(
+			'type' => 'callback',
+			'label' => $txt['pm_archive_after'],
+			'callback_func' => 'pm_archive_after',
+			'size' => 7,
+			'permission' => 'pm_read',
+			'preload' => create_function('', '
+				global $context, $cur_profile;
+				$cur_profile[\'pm_archive_after\'] = empty($cur_profile[\'pm_archive_after\']) ? 0 : $cur_profile[\'pm_archive_after\'];
+				$context[\'pm_archive_enabled\'] = $cur_profile[\'pm_archive_after\'] > 0;
+				$context[\'pm_archive_after\'] = abs($cur_profile[\'pm_archive_after\']);
+				return true;
+			'),
+			'input_validate' => create_function('&$value', '
+				global $cur_profile, $profile_vars;
+				$invert = !empty($_POST[\'pm_archive_enabled\']) ? 1 : -1;
+				$cur_profile[\'pm_archive_after\'] = $profile_vars[\'pm_archive_after\'] = $value = max($value, 0) * $invert;
+				return true;
+			'),
+		),
+		]]></add>
+	</operation>
+
+	<!-- pmprefs function -->
+	<operation>	<!-- line 1647 -->
+		<search position="before"><![CDATA['pm_prefs',]]></search>
+		<add><![CDATA[ 'hr', 'pm_archive_after',]]></add>
+	</operation>
+</file>
+
+<!------------------------------------------------------------------------------
+<!-- Theme file modifications
+<!----------------------------------------------------------------------------->
+<file name="$themedir/PersonalMessage.template.php">
+	<-- template_subject_list function -->
+	<operation>	<!-- line 592 -->
+		<search position="before"><![CDATA[', $message['is_unread'] ? '&nbsp;<img src="' . $settings['lang_images_url'] . '/new.gif" alt="' . $txt['new'] . '" />' : '', ]]></search>
+		<add><![CDATA[ !empty($message['archived']) ? '&nbsp;<img src="' . $settings['lang_images_url'] . '/archived.gif" alt="' . $txt['archived'] . '" />' : '', ]]></add>
+	</operation>
+</file>
+<file name="$themedir/Profile.template.php">
+	<operation>
+		<search position="end" />
+		<add><![CDATA[
+// Sets the number of days before a PM gets archived
+function template_profile_pm_archive_after()
+{
+	global $context, $txt;
+
+	echo '
+					<dl>
+						<dt>
+							', $txt['pm_archive_enabled'], '
+						</dt>
+						<dd>
+							<input type="hidden" name="pm_archive_enabled" value="0" />
+							<input type="checkbox" name="pm_archive_enabled" id="pm_archive_enabled" value="1"', !empty($context['pm_archive_enabled']) ? ' checked="checked"' : '', ' class="input_check" />
+						</dd>
+						<dt>
+							', $txt['pm_archive_after'], '
+						</dt>
+						<dd>
+							<input type="hidden" name="pm_archive_after" value="0" />
+							<input type="text" name="pm_archive_after" id="pm_archive_after" size="7" value="', $context['pm_archive_after'] ? '0' : $context['pm_archive_after'], '" class="input_text" />&nbsp;', $txt['days_word'], '
+						</dd>
+					</dl>';
+}	
+]]></add>
+	</operation>
+</file>
+</modification>
