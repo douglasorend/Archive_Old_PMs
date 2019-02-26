@@ -3,7 +3,7 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>Dougiefresh:MoveToEnd</id>
 <name>Move Old PMs To End</name>
-<version>1.3</version>
+<version>1.4</version>
 
 <!------------------------------------------------------------------------------
 <!-- Source file modifications
@@ -48,8 +48,8 @@
 		<add><![CDATA[' . ($context['pm_archive_after'] ? ', IF(pmr.archived = 2, 2, 0) AS is_archived, ' : '') . ']]></add>
 	</operation>
 	<operation>	<!-- line 693 -->
-		<search position="replace"><![CDATA[ORDER BY ' . ($_GET['sort'] == 'pm.id_pm' && $context['folder'] != 'sent' ? 'id_pm' : '{raw:sort}') . ($descending ? ' DESC' : ' ASC') . (empty($_GET['pmsg']) ? ']]></search>
-		<add><![CDATA[ORDER BY ' . ($context['pm_archive_after'] ? 'is_archived ASC, ' : '') . ($_GET['sort'] == 'pm.id_pm' && $context['folder'] != 'sent' ? 'id_pm' : '{raw:sort}') . ($descending ? ' DESC' : ' ASC') . (empty($_GET['pmsg']) ? ']]></add>
+		<search position="replace"><![CDATA[ORDER BY ' . ($_GET['sort'] == 'pm.id_pm' && $context['folder'] != 'sent' ? 'pmr.id_pm' : '{raw:sort}') . ($descending ? ' DESC' : ' ASC') . (empty($pmsg) ? '
+		<add><![CDATA[ORDER BY ' . ($context['pm_archive_after'] ? 'is_archived ASC, ' : '') . ($_GET['sort'] == 'pmr.id_pm' && $context['folder'] != 'sent' ? 'id_pm' : '{raw:sort}') . ($descending ? ' DESC' : ' ASC') . (empty($_GET['pmsg']) ? ']]></add>
 	</operation>
 	<operation>	<!-- line 710 -->
 		<search position="before"><![CDATA[SELECT pm.id_pm, pm.id_pm_head, pm.id_member_from]]></search>

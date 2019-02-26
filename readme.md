@@ -1,6 +1,6 @@
 ------
 
-# ARCHIVE OLD PMS v1.3
+# ARCHIVE OLD PMS v1.4
 
 [**By Dougiefresh**](http://www.simplemachines.org/community/index.php?action=profile;u=253913) -> [Link to Mod](http://custom.simplemachines.org/mods/index.php?mod=4165)
 
@@ -17,7 +17,7 @@ o **Enable archiving personal messages?**
 o **Archive personal messages older than [nobbc][x][/nobbc] days**
 
 ## Compatibility Notes
-This mod was tested on SMF 2.0.15 and SMF 2.1 Beta 3 using a MySQL database, but should work on SMF 2.0 and up.  SMF 1.x is not and will not be supported.  Postgres databases have not been tested.
+This mod was tested on SMF 2.0.15 and SMF 2.1 RC 1 using a MySQL database, but should work on SMF 2.0 and up.  SMF 1.x, nor SMF 2.1 Betas are not and will not be supported.  Postgres databases have not been tested.
 
 ## Related Discussion
 o [PM Archiving?](https://www.simplemachines.org/community/index.php?topic=555681.0)
